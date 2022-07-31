@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>AnBer-Login-Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link th:href="@{/css/main.css}" rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+<header>
+    <div class="containernav">
+        <div class="pre-nav">
+            <div>
+                <a href="/" class="logo">
+                    <img id="logo" src="../images/AnBerLogo.jpg" alt="AnBerLogo" width="60%" height="60%"/>
+                </a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li class="navlist-item"><a href="/">Home</a></li>
+                    <li class="navlist-item"><a href="#">Electricity</a></li>
+                    <li class="navlist-item"><a href="#">Gas</a></li>
+                    <li class="navlist-item"><a href="/webapptree">App Tree</a></li>
+                    <li class="navlist-item"><a href="/login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<main>
+    <div>
+        <div id="contain">
+        <table>
+            <caption>Homes</caption>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>PostalCode</th>
+                <th>Type</th>
+                <th>Size in Square Meters</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${homes.empty}">
+                <td colspan="2"> No Homes Available </td>
+            </tr>
+            <tr th:each="home: ${homes}">
+                <td><span th:text="${home.homeName}">Home Name</span></td>
+                <td th:text="${home.country}"></td>
+                <td th:text="${home.city}"></td>
+                <td th:text="${home.postalCode}"></td>
+                <td th:text="${home.type}"></td>
+                <td th:text="${home.sizeInSquareMeters}"></td>
+                <td><a th:href="@{'/edit/' + ${home.id}}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i>Edit</a></td>
+                <td><a th:href="@{'/delete/' + ${home.id}}" class="btn btn-danger"><i class="fas fa-user-edit ml-2"></i>Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+            </div>
+    </div>
+    <form th:action="@{/save-home-form}" th:object="${home}" method="get">
+            <button type="submit">Save New Home</button>
+        </form>
+
+    <form th:action="@{/delete}" th:object="${user}" method="post">
+        <button type="submit">Delete</button>
+    </form>
+</main>
+</body>
+</html>
+

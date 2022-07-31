@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create new Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link th:href="@{/css/main.css}" rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+<header>
+    <div class="containernav">
+        <div class="pre-nav">
+            <div>
+                <a href="/" class="logo">
+                    <img id="logo" src="../images/AnBerLogo.jpg" alt="AnBerLogo" width="60%" height="60%"/>
+                </a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li class="navlist-item"><a href="/">Home</a></li>
+                    <li class="navlist-item"><a href="#">Electricity</a></li>
+                    <li class="navlist-item"><a href="#">Gas</a></li>
+                    <li class="navlist-item"><a href="#">Contact</a></li>
+                    <li class="navlist-item"><a href="/login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<main>
+    <form class="form-inline" action="#" >
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+    <br>
+    <div class="container">
+        <form action="#" th:action="@{/save}" th:object="${home}" method="post">
+            <div class="form-group">
+                <label th:for="homeName">Name:</label>
+                <input type="text" th:field="*{homeName}" class="form-control" placeholder="Home Name">
+            </div>
+            <div class="form-group">
+                <label th:for="country">Country:</label>
+                <input type="text" th:field="*{country}" class="form-control" placeholder="Country">
+            </div>
+            <div class="form-group">
+                <label th:for="city">City:</label>
+                <input type="text" th:field="*{city}" class="form-control" placeholder="City">
+            </div>
+            <div class="form-group">
+                <label th:for="postalCode">Postal Code:</label>
+                <input type="text" th:field="*{postalCode}" class="form-control" placeholder="Postal Code">
+            </div>
+            <div class="form-group">
+                <label th:for="type">Type</label>
+                <select th:field="*{type}">
+                    <option th:each="homeType : ${homeType}"
+                            th:text="${homeType.name}"
+                            th:value="${homeType}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label th:for="sizeInSquareMeters">Size in Square Meters:</label>
+                <input type="text" th:field="*{sizeInSquareMeters}" class="form-control" placeholder="Size in Square Meters">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+    <div>
+        <span> Here should be your Profile, if I could learn html/css faster </span>
+    </div>
+    <form th:action="@{/delete}" th:object="${user}" method="post">
+        <button type="submit">Delete</button>
+    </form>
+</main>
+</body>
+</html>
