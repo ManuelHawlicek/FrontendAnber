@@ -68,7 +68,7 @@
             <button type="submit">Save New Home</button>
         </form>
 
-    <form th:action="@{/delete}" th:object="${user}" method="post">
+    <form th:action="@{/delete}" th:object="${user}" method="get">
         <button type="submit">Delete</button>
     </form>
 </main>

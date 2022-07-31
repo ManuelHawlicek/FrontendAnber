@@ -1,5 +1,6 @@
 package io.everyonecodes.anber.data;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,11 +11,11 @@ public class ResourceInfo {
     private String description;
     private String uri;
     private String restMethod;
-    private Set<Role> allowedRoles;
+    private List<String> allowedRoles;
 
     public ResourceInfo() {}
 
-    public ResourceInfo(String category, String name, String description, String uri, String restMethod, Set<Role> allowedRoles) {
+    public ResourceInfo(String category, String name, String description, String uri, String restMethod, List<String> allowedRoles) {
         this.category = category;
         this.name = name;
         this.description = description;
@@ -63,11 +64,11 @@ public class ResourceInfo {
         this.restMethod = restMethod;
     }
 
-    public Set<Role> getAllowedRoles() {
+    public List<String> getAllowedRoles() {
         return allowedRoles;
     }
 
-    public void setAllowedRoles(Set<Role> allowedRoles) {
+    public void setAllowedRoles(List<String> allowedRoles) {
         this.allowedRoles = allowedRoles;
     }
 

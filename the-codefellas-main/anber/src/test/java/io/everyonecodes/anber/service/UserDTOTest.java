@@ -1,6 +1,6 @@
 package io.everyonecodes.anber.service;
 
-import io.everyonecodes.anber.data.Role;
+
 import io.everyonecodes.anber.data.User;
 import io.everyonecodes.anber.data.UserPrivateDTO;
 import io.everyonecodes.anber.data.UserPublicDTO;

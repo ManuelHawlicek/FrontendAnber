@@ -2,7 +2,6 @@ package io.everyonecodes.anber.service;
 
 
 import io.everyonecodes.anber.data.*;
-import io.everyonecodes.anber.repository.RoleRepository;
 import io.everyonecodes.anber.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,16 +15,14 @@ import java.util.Optional;
 @Service
 public class UserServiceImp implements UserService {
     private final PasswordEncoder encoder;
-    private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final UserDTO mapper;
     
     private final String roleName;
     private final String roleDescription;
 
-    public UserServiceImp(PasswordEncoder encoder, RoleRepository roleRepository, UserRepository userRepository, UserDTO mapper, @Value("${messages.user.userRole.name}") String roleName, @Value("${messages.user.userRole.description}") String roleDescription) {
+    public UserServiceImp(PasswordEncoder encoder, UserRepository userRepository, UserDTO mapper, @Value("${messages.user.userRole.name}") String roleName, @Value("${messages.user.userRole.description}") String roleDescription) {
         this.encoder = encoder;
-        this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.roleName = roleName;
@@ -59,12 +56,11 @@ public class UserServiceImp implements UserService {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAccountNonLocked(true);
         user.setUsername(user.getEmail());
-        Role userRole = roleRepository.findByRole(roleName);
-        if (userRole == null) {
-            userRole = new Role(roleName, roleDescription);
+        if (user.getRoles() == null) {
+            user.setRoles(roleName);
         }
         
-        user.setRoles(new HashSet<>(List.of(userRole)));
+        user.setRoles(roleName);
     }
 
     @Override

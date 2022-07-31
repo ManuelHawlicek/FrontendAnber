@@ -1,6 +1,6 @@
 package io.everyonecodes.anber;
 
-import io.everyonecodes.anber.data.Role;
+
 import io.everyonecodes.anber.data.User;
 import io.everyonecodes.anber.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +36,7 @@ public class InitializationRunner {
             if (!userRepository.existsByEmail(adminEmail)) {
                 String password = passwordEncoder.encode(adminPassword);
                 User admin = new User("firstName", "lastName", adminEmail, password, "admin", "country",
-                        Set.of(new Role("ROLE_ADMIN", "Site Admin")), List.of(), false);
+                        "ROLE_ADMIN", List.of(), false);
                 userRepository.save(admin);
             }
 

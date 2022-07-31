@@ -20,9 +20,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<String> authorities = new HashSet<>();
-        user.getRoles().forEach(role -> authorities.add(role.getRole()));
-        return AuthorityUtils.createAuthorityList(authorities.toArray(new String[0]));
+        return AuthorityUtils.createAuthorityList(user.getRoles());
     }
 
     @Override

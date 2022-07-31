@@ -1,7 +1,6 @@
 package io.everyonecodes.anber.service;
 
 import io.everyonecodes.anber.data.ResourceInfo;
-import io.everyonecodes.anber.data.Role;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -60,14 +59,11 @@ public class WebAppTreeService {
         return getAuthentication().getAuthorities();
     }
 
-    private boolean checkIfAuthoritiesAreInAllowedRoles(Set<Role> allowedRoles, Collection<? extends GrantedAuthority> authorities) {
+    private boolean checkIfAuthoritiesAreInAllowedRoles(List<String> allowedRoles, Collection<? extends GrantedAuthority> authorities) {
         List<String> authoritiesStringList = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        List<String> allowedRolesStringList = allowedRoles.stream()
-                .map(Role::getRole)
-                .collect(Collectors.toList());
-        return authoritiesStringList.stream().anyMatch(allowedRolesStringList::contains);
+        return authoritiesStringList.stream().anyMatch(allowedRoles::contains);
     }
 
     public List<ResourceInfo> getResourceinfosList() {

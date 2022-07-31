@@ -48,8 +48,7 @@ public class User {
 
     private String country;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private String roles;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable
@@ -100,7 +99,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String email, String password, String username, String country, Set<Role> roles, List<Home> savedHomes, boolean notificationsEnabled) {
+    public User(String firstName, String lastName, String email, String password, String username, String country, String roles, List<Home> savedHomes, boolean notificationsEnabled) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -112,7 +111,7 @@ public class User {
         this.notificationsEnabled = notificationsEnabled;
     }
 
-    public User(String email, String password, Set<Role> roles, String username, String country, List<Home> savedHomes, boolean notificationsEnabled) {
+    public User(String email, String password, String roles, String username, String country, List<Home> savedHomes, boolean notificationsEnabled) {
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -122,7 +121,7 @@ public class User {
         this.notificationsEnabled = notificationsEnabled;
     }
 
-    public User(Long id, String email, String password, Set<Role> roles, String username, String country, List<Home> savedHomes, boolean notificationsEnabled) {
+    public User(Long id, String email, String password, String roles, String username, String country, List<Home> savedHomes, boolean notificationsEnabled) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -141,7 +140,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String password, Set<Role> roles) {
+    public User(String email, String password, String roles) {
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -235,11 +234,11 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 
